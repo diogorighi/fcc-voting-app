@@ -1,1 +1,19 @@
-Hello from profile, {{ user.email }}! 
+<h2>Hello from profile, {{ user.email }}!</h2>
+
+<p>
+	<a href="/polls/new" class="btn btn-primary">Create a new poll!</a>	
+</p>
+
+{{#each polls as |poll|}}
+	<h3>{{title}}</h3>
+	{{#each options as |option|}}
+		<p>
+			{{title}} - {{votes}}
+			<form action="/polls/{{poll._id}}/{{_id}}" method="POST">
+				<input type="submit" value="votar" class="btn btn-primary">
+			</form>
+			
+		</p>
+	{{/each}}
+{{/each}}
+

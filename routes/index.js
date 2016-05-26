@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+var Poll = mongoose.model('Poll');
 var passport = require('passport');
 var flash = require('connect-flash');
 var session = require('express-session');
@@ -21,7 +22,9 @@ router.get('/signup', function(req, res) {
 });
 
 router.get('/profile', isLoggedIn, function(req, res) {
-  res.render('profile', { user: req.user });
+  Poll.find({ author: req.user._id }).exec(function(err, docs){
+    res.render('profile', { user: req.user, polls: docs });    
+  })
 });
 
 router.get('/logout', function(req, res) {
