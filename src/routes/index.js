@@ -1,3 +1,6 @@
+/* jshint node: true */
+"use strict";
+
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
@@ -20,15 +23,15 @@ router.get('/', function(req, res) {
 });
 
 router.get('/login', function(req, res) {
-  // if(req.app.get("env") === "development"){
-  //   User.findOne({ email: "diogorighi@gmail.com" }, function(err, doc){
-  //     req.logIn(doc, function(err) {
-  //       if(err){ return next(err); }
-  //       return res.redirect("/profile")
-  //     })
-  //   });
-  //   return;
-  // }
+  if(req.app.get("env") === "development"){
+    User.findOne({ email: process.env.DEV_EMAIL }, function(err, doc){
+      req.logIn(doc, function(err) {
+        if(err){ return res.status(500).send(err); }
+        return res.redirect("/profile");
+      });
+    });
+    return;
+  }
   res.render('login');
 });
 
@@ -38,8 +41,8 @@ router.get('/signup', function(req, res) {
 
 router.get('/profile', isLoggedIn, function(req, res) {
   Poll.find({ author: req.user._id }).exec(function(err, docs){
-    res.render('profile', { user: req.user, polls: docs });    
-  })
+    res.render('profile', { user: req.user, polls: docs });
+  });
 });
 
 router.get('/logout', function(req, res) {
@@ -61,7 +64,7 @@ router.post('/signup', passport.authenticate('local-signup', {
 }));
 
 function isLoggedIn(req, res, next) {
-    // if user is authenticated in the session, carry on 
+    // if user is authenticated in the session, carry on
     if (req.isAuthenticated())
         return next();
 

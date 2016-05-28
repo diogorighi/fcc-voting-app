@@ -44,10 +44,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cookieParser());
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: "SA_DK)(()WEJfJ()*FJ(*EH#IORNEakfcmla))",
   resave: true,
-  saveUninitialized: true,
-  cookie: { maxAge: 60000 }
+  saveUninitialized: true
 }));
 app.use(flash());
 

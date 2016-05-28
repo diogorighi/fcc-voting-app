@@ -1,7 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var bcrypt   = require('bcrypt');
+var bcrypt   = require('bcryptjs');
 
 var userSchema = new mongoose.Schema({
 	name: String,
@@ -12,7 +12,7 @@ var userSchema = new mongoose.Schema({
 	},
 	password: {
 		type: String,
-		required: true	
+		required: true
 	},
 	createdAt: { type: Date, default: Date.now }
 });

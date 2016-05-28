@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var _ = require('lodash');
 var Schema = mongoose.Schema;
 
 var pollSchema = new mongoose.Schema({
@@ -9,10 +10,6 @@ var pollSchema = new mongoose.Schema({
 	}],
 	author: { type: Schema.Types.ObjectId, ref: 'User' },
 	created: { type: Date, default: Date.now }
-})
-
-pollSchema.methods.addVote = function(option){
-	this.options[option].votes += 1;
-}
+});
 
 mongoose.model('Poll', pollSchema);
