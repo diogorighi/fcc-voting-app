@@ -1,19 +1,23 @@
-<h2>Hello from profile, {{ user.email }}!</h2>
-
-<p>
-	<a href="/polls/new" class="btn btn-primary">Create a new poll!</a>	
-</p>
-
-{{#each polls as |poll|}}
-	<h3>{{title}}</h3>
-	{{#each options as |option|}}
+<div class="jumbotron">
+		<h2>Welcome, {{ user.name }}!</h2>
 		<p>
-			{{title}} - {{votes}}
-			<form action="/polls/{{poll._id}}/{{_id}}" method="POST">
-				<input type="submit" value="votar" class="btn btn-primary">
-			</form>
-			
+				<a href="/polls/new" class="btn btn-primary">Create a new poll!</a>
 		</p>
-	{{/each}}
-{{/each}}
 
+</div>
+
+
+<h3>Your polls:</h3>
+
+<ul class="list-group">
+{{#each polls as |poll|}}
+	<li class="list-group-item clearfix">
+		{{title}}
+	  <div class="btn-group btn-group-sm pull-xs-right">
+			<a class="btn btn-primary" href="/polls/{{_id}}">View</a>
+			<a class="btn btn-secondary" href="/polls/{{_id}}">Delete</a>
+	  </div>
+
+	</li>
+{{/each}}
+</ul>

@@ -21,10 +21,11 @@ passport.use('local-signup', new LocalStrategy({
 	function(req, email, password, done) {
     User.findOne({ email: email }, function (err, user) {
       if (err) { return done(err); }
-      if (user) { 
-      	return done(null, false, { message: "this e-mail is already taken!" }); 
+      if (user) {
+      	return done(null, false, { message: "this e-mail is already taken!" });
       } else {
       	var newUser = new User();
+        newUser.name = req.body.name;
       	newUser.email = email;
       	newUser.password = newUser.generateHash(password);
 
