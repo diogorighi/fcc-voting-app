@@ -52,6 +52,7 @@ function isLoggedIn(req, res, next) {
         return next();
 
     // if they aren't redirect them to the home page
+    req.flash("error", "You have no authorization to do that. Please login.");
     res.redirect('/');
 }
 

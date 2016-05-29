@@ -13,7 +13,7 @@ my friends.
 -   [x] User Story: As an authenticated user, I can see the aggregate results
  of my polls.
 
--   [ ] User Story: As an authenticated user, I can delete polls that I decide
+-   [x] User Story: As an authenticated user, I can delete polls that I decide
  I don't want anymore.
 
 -   [ ] User Story: As an authenticated user, I can create a poll with any

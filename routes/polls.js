@@ -36,10 +36,16 @@ router.use(function(req, res, next) {
 
 router.get('/new', isLoggedIn, ctrlPolls.new);
 router.post('/', isLoggedIn, ctrlPolls.create);
-router.get('/:id', ctrlPolls.show);
-router.get('/vote/:id', ctrlPolls.vote);
 router.get('/success/:id', ctrlPolls.createdWithSuccess);
+router.delete('/:id', isLoggedIn, ctrlPolls.deletePoll);
+
+router.get('/:id', ctrlPolls.show);
+
+router.get('/vote/:id', ctrlPolls.vote);
 router.post('/vote', ctrlPolls.updateOption);
+
+
+
 
 function isLoggedIn(req, res, next) {
     // if user is authenticated in the session, carry on
@@ -47,6 +53,7 @@ function isLoggedIn(req, res, next) {
         return next();
 
     // if they aren't redirect them to the home page
+    req.flash("error", "You have no authorization to do that. Please login.");
     res.redirect('/');
 }
 

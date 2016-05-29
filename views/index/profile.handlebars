@@ -1,11 +1,10 @@
 <div class="jumbotron">
-		<h2>Welcome, {{ user.name }}!</h2>
+		<h2>Welcome, {{ currentUser.name }}!</h2>
 		<p>
 				<a href="/polls/new" class="btn btn-primary">Create a new poll!</a>
 		</p>
 
 </div>
-
 
 <h3>Your polls:</h3>
 
@@ -15,9 +14,8 @@
 		{{title}}
 	  <div class="btn-group btn-group-sm pull-xs-right">
 			<a class="btn btn-primary" href="/polls/{{_id}}">View</a>
-			<a class="btn btn-secondary" href="/polls/{{_id}}">Delete</a>
+			<a class="btn btn-secondary btn-delete" href="/polls/{{_id}}">Delete</a>
 	  </div>
-
 	</li>
 {{/each}}
 </ul>
