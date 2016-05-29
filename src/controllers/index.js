@@ -13,12 +13,15 @@ var Poll = mongoose.model("Poll");
 // Functions
 
 module.exports.home = function(req, res) {
-  res.render('index', { user: req.user, session: JSON.stringify(req.session) });
+  Poll.find().populate('author').exec(function(err, polls){
+    if (err) { res.status(500).send("There was an error. Try again."); }
+    res.render('index', { polls: polls });
+  });
 };
 
 module.exports.profile = function(req, res) {
   Poll.find({ author: req.user._id }).exec(function(err, docs){
-    res.render('index/profile', { user: req.user, polls: docs });
+    res.render('index/profile', { polls: docs });
   });
 };
 

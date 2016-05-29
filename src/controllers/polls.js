@@ -51,7 +51,7 @@ module.exports.updateOption = function(req, res) {
     function(err,doc) {
       if(err) { return res.status(500).send(err); }
       req.flash("success", "Vote computed!");
-      res.redirect('/profile');
+      res.redirect('/polls/' + doc._id);
     }
   );
 };

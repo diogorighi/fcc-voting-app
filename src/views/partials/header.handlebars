@@ -4,15 +4,15 @@
       <li class="nav-item active">
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
-      {{#unless user}}
+      {{#unless currentUser}}
       <li class="nav-item">
-        <a class="nav-link" href="/signup">Sign Up</a>
+        <a class="nav-link" href="/signup">Sign up</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/login">Login</a>
       </li>
       {{/unless}}
-      {{#if user}}
+      {{#if currentUser}}
       <li class="nav-item">
         <a class="nav-link" href="/profile">Profile</a>
       </li>
@@ -22,5 +22,5 @@
       {{/if}}
     </ul>
   </nav>
-  <h3 class="text-muted">Project name</h3>
+  <h3 class="text-muted">Voting App</h3>
 </div>

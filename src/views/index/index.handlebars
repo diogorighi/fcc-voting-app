@@ -3,3 +3,15 @@
     <p class="lead">Please <a href="/login">Login</a> or <a href="/signup">Sign Up</a> to create your polls!</p>
     <a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a>
 </div>
+
+<ul class="list-group">
+  {{#each polls}}
+  <li class="list-group-item">
+    {{title}} by {{author.name}}
+    <div class="btn-group pull-xs-right">
+      <a class="btn btn-primary btn-sm" href="polls/{{_id}}">View</a>
+      <a class="btn btn-secondary btn-sm" href="polls/vote/{{_id}}">Vote</a>
+    </div>
+  </li>
+  {{/each}}
+</ul>
