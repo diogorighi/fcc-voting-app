@@ -1,0 +1,28 @@
+<h3>{{poll.title}}</h3>
+
+<canvas id="pollChart" width="300" height="150"></canvas>
+
+<script>
+window.onload = function(){
+  var ctx = document.getElementById("pollChart");
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [ '{{ poll.options.0.title }}', '{{poll.options.1.title }}' ],
+        datasets: [{
+            label: '# of Votes',
+            data: [{{poll.options.0.votes}}, {{poll.options.1.votes}}]
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+  });
+}
+</script>

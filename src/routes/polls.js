@@ -36,7 +36,10 @@ router.use(function(req, res, next) {
 
 router.get('/new', isLoggedIn, ctrlPolls.new);
 router.post('/', isLoggedIn, ctrlPolls.create);
-router.post('/:poll_id/:option_id', ctrlPolls.updateOption);
+router.get('/:id', ctrlPolls.show);
+router.get('/vote/:id', ctrlPolls.vote);
+router.get('/success/:id', ctrlPolls.createdWithSuccess);
+router.post('/vote', ctrlPolls.updateOption);
 
 function isLoggedIn(req, res, next) {
     // if user is authenticated in the session, carry on

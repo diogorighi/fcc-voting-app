@@ -32,16 +32,17 @@ module.exports.create = function(req, res) {
 	poll.save(function(err, doc){
 		if(err) { return res.status(500).send(err); }
     req.flash("success", "Your poll was created!");
-		res.redirect('/profile');
+		res.redirect('/polls/success/' + doc._id);
 	});
 };
 
 module.exports.updateOption = function(req, res) {
-  var pollId = req.params.poll_id;
-	var optionId = req.params.option_id;
+  var optionId = req.body.option;
+
+  console.log(optionId);
 
   Poll.findOneAndUpdate(
-    { "_id": pollId, "options._id": optionId },
+    { "options._id": optionId },
     {
         "$inc": {
             "options.$.votes": 1
@@ -53,4 +54,34 @@ module.exports.updateOption = function(req, res) {
       res.redirect('/profile');
     }
   );
+};
+
+module.exports.createdWithSuccess = function(req, res) {
+  var pollId = req.params.id;
+
+  Poll.findOne({ _id: pollId }, function(err, doc){
+    if(err) { return res.status(500).send(err); }
+    if(!doc) { return res.status(400).send('Poll not found'); }
+    res.render('polls/success', { poll: doc });
+  });
+};
+
+module.exports.show = function(req, res) {
+  var pollId = req.params.id;
+
+  Poll.findOne({ _id: pollId }, function(err, doc){
+    if(err) { return res.status(500).send(err); }
+    if(!doc) { return res.status(400).send('Poll not found'); }
+    res.render('polls/show', { poll: doc });
+  });
+};
+
+module.exports.vote = function(req, res) {
+  var pollId = req.params.id;
+
+  Poll.findOne({ _id: pollId }, function(err, doc){
+    if(err) { return res.status(500).send(err); }
+    if(!doc) { return res.status(400).send('Poll not found'); }
+    res.render('polls/vote', { poll: doc });
+  });
 };
