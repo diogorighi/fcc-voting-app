@@ -1,5 +1,5 @@
 node_modules/
-src/public/components
+public/components
 .sass-cache
 .env
 .npm-debug.log
