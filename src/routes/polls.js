@@ -4,12 +4,10 @@
 // ----------------------------------
 // Modules
 
-var express   = require('express');
-var router    = express.Router();
-var mongoose  = require('mongoose');
-var passport  = require('passport');
-var flash     = require('connect-flash');
-var session   = require('express-session');
+var express = require('express');
+var router = express.Router();
+var mongoose = require('mongoose');
+var _ = require('lodash');
 
 // ----------------------------------
 // Models
@@ -20,7 +18,7 @@ var Poll = mongoose.model('Poll');
 // ----------------------------------
 // Controllers
 
-var ctrlIndex = require('../controllers/index');
+var ctrlPolls = require('../controllers/polls');
 
 // ----------------------------------
 // Middlewares
@@ -34,17 +32,11 @@ router.use(function(req, res, next) {
 });
 
 // ----------------------------------
-// Routes for /
+// Routes to /polls
 
-router.get('/', ctrlIndex.home);
-router.get('/profile', isLoggedIn, ctrlIndex.profile);
-
-router.get('/signup', ctrlIndex.signup);
-router.get('/login', ctrlIndex.login);
-router.get('/logout', ctrlIndex.logout);
-
-// ----------------------------------
-// Functions
+router.get('/new', isLoggedIn, ctrlPolls.new);
+router.post('/', isLoggedIn, ctrlPolls.create);
+router.post('/:poll_id/:option_id', ctrlPolls.updateOption);
 
 function isLoggedIn(req, res, next) {
     // if user is authenticated in the session, carry on

@@ -7,6 +7,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+
 var exphbs  = require('express-handlebars');
 var session = require('express-session');
 var mongoose = require('mongoose');
@@ -17,7 +18,8 @@ require('./models/db');
 require('./config/passport');
 
 var routes = require('./routes/index');
-var routesPoll = require('./routes/poll');
+var users = require('./routes/users');
+var polls = require('./routes/polls');
 
 var app = express();
 
@@ -54,7 +56,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', routes);
-app.use('/polls', routesPoll);
+app.use('/users', users);
+app.use('/polls', polls);
+
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
