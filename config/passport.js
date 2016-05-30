@@ -1,5 +1,6 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var GitHubStrategy = require('passport-github2').Strategy;
 var mongoose = require('mongoose');
 var User = mongoose.model("User");
 var flash = require('connect-flash');
@@ -60,9 +61,11 @@ passport.use('github-login', new GitHubStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
     process.nextTick(function(){
-      User.findOrCreate({ githubId: profile.id }, function (err, user) {
-        return done(err, user);
-      });
+      console.log(profile);
+      done(err, false);
+      // User.findOrCreate({ "github.id": profile.id }, function (err, user) {
+      //   return done(err, user);
+      // });
     });
   }
 ));

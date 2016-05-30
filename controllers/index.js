@@ -33,15 +33,15 @@ module.exports.login = function(req, res) {
   //
   // I don't want to login everytime I restart the server!
   //
-  if(req.app.get("env") === "development"){
-    User.findOne({ email: process.env.DEV_EMAIL }, function(err, doc){
-      req.logIn(doc, function(err) {
-        if(err){ return res.status(500).send(err); }
-        return res.redirect("/profile");
-      });
-    });
-    return;
-  }
+  // if(req.app.get("env") === "development"){
+  //   User.findOne({ email: process.env.DEV_EMAIL }, function(err, doc){
+  //     req.logIn(doc, function(err) {
+  //       if(err){ return res.status(500).send(err); }
+  //       return res.redirect("/profile");
+  //     });
+  //   });
+  //   return;
+  // }
   res.render('index/login');
 };
 
