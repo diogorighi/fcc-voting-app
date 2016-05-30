@@ -25,8 +25,12 @@ module.exports.create = function(req, res) {
 	var poll = new Poll();
 
 	poll.title = body.title;
-	poll.options.push({	title: body.option_1 });
-	poll.options.push({ title: body.option_2 });
+
+  //populate options
+  body.options.forEach(function(option){
+      poll.options.push({	title: option });
+  });
+
 	poll.author = user._id;
 
 	poll.save(function(err, doc){

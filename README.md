@@ -16,7 +16,7 @@ my friends.
 -   [x] User Story: As an authenticated user, I can delete polls that I decide
  I don't want anymore.
 
--   [ ] User Story: As an authenticated user, I can create a poll with any
+-   [x] User Story: As an authenticated user, I can create a poll with any
  number of possible items.
 
 -   [x] User Story: As an unauthenticated or authenticated user, I can see and

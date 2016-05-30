@@ -21,4 +21,15 @@ $(function(){
     });
   });
 
+  $(".btn-add-option").on('click', function(e){
+    e.preventDefault();
+
+    var html = "";
+    html += '<fieldset class="form-group">';
+  	html += '<input class="form-control" type="text" name="options[]" placeholder="...">';
+  	html += '</fieldset>';
+
+    $(html).insertBefore($(this).closest('.form-group'));
+  });
+
 });

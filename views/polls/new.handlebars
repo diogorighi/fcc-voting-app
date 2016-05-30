@@ -1,14 +1,17 @@
 <form action="/polls" method="POST">
 	<fieldset class="form-group">
-		<input class="form-control" type="text" name="title" placeholder="Title:">  	
+		<input class="form-control" type="text" name="title" placeholder="What's the best food in the world?">
 	</fieldset>
 	<fieldset class="form-group">
-		<input class="form-control" type="text" name="option_1" placeholder="Option 1">
+		<input class="form-control" type="text" name="options[]" placeholder="Pizza">
 	</fieldset>
 	<fieldset class="form-group">
-		<input class="form-control" type="text" name="option_2" placeholder="Option 2">
+		<input class="form-control" type="text" name="options[]" placeholder="Cake">
 	</fieldset>
 	<fieldset class="form-group">
+		<a class="btn btn-secondary btn-add-option" href="#">New Option</a>
+	</fieldset>
+	<fieldset class="form-group pull-xs-right">
 		<input class="btn btn-primary" type="submit" value="Submit">
 	</fieldset>
 </form>

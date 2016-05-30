@@ -8,10 +8,18 @@ window.onload = function(){
   var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: [ '{{ poll.options.0.title }}', '{{poll.options.1.title }}' ],
+        labels: [
+          {{#each poll.options as |option| }}
+            '{{option.title}}',
+          {{/each }}
+        ],
         datasets: [{
             label: '# of Votes',
-            data: [{{poll.options.0.votes}}, {{poll.options.1.votes}}]
+            data: [
+              {{#each poll.options as |option| }}
+                '{{option.votes}}',
+              {{/each }}
+            ]
         }]
     },
     options: {
