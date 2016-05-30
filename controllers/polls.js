@@ -41,21 +41,35 @@ module.exports.create = function(req, res) {
 };
 
 module.exports.updateOption = function(req, res) {
-  var optionId = req.body.option;
-
-  console.log(optionId);
+  var optionTitle = req.body.option;
+  var pollId = req.body.poll;
 
   Poll.findOneAndUpdate(
-    { "options._id": optionId },
+    { "_id": pollId, "options.title": optionTitle },
     {
         "$inc": {
             "options.$.votes": 1
         }
     },
-    function(err,doc) {
+    function(err, doc) {
       if(err) { return res.status(500).send(err); }
-      req.flash("success", "Vote computed!");
-      res.redirect('/polls/' + doc._id);
+      if(doc === null) {
+        Poll.findOne({ "_id": pollId }, function(err, doc){
+          if(err) { return res.status(500).send(err); }
+          doc.options.push({
+            title: optionTitle,
+            votes: 1
+          });
+          doc.save(function(err, doc){
+            if(err) { return res.status(500).send(err); }
+            req.flash("success", "Vote computed!");
+            res.redirect('/polls/' + pollId);
+          });
+        });
+      } else {
+        req.flash("success", "Vote computed!");
+        res.redirect('/polls/' + doc._id);
+      }
     }
   );
 };

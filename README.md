@@ -26,5 +26,5 @@ vote on everyone's polls.
  the results of polls in chart form. (This could be implemented using Chart.js
  or Google Charts.)
 
--   [ ] User Story: As an authenticated user, if I don't like the options
+-   [x] User Story: As an authenticated user, if I don't like the options
 on a poll, I can create a new option.

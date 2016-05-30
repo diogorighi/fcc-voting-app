@@ -1,18 +1,30 @@
 <h3>{{poll.title}}</h3>
 
 <form action="/polls/vote" method="post">
-  <ul class="list-group m-t-3">
-    {{#each poll.options}}
-    <li class="list-group-item">
-      <label class="c-input c-radio">
-        <input name="option" type="radio" value="{{_id}}">
-        <span class="c-indicator"></span>
-        {{title}}
-      </label>
-    </li>
-    {{/each}}
-  </ul>
+  <div class="form-group">
+    <ul class="list-group m-t-3">
+      {{#each poll.options}}
+      <li class="list-group-item">
+        <label class="c-input c-radio">
+          <input name="option" type="radio" value="{{title}}">
+          <span class="c-indicator"></span>
+          {{title}}
+        </label>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+
+  {{#if currentUser}}
+
+  <div class="form-group">
+    <a class="btn btn-secondary btn-create-option" href="#">Create new option</a>
+  </div>
+
+  {{/if}}
+
   <div class="form-group m-t-1 pull-xs-right">
+      <input name="poll" type="hidden" value="{{poll._id}}">
       <input class="btn btn-primary" type="submit" value="Vote">
   </div>
 
