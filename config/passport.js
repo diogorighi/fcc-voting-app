@@ -54,7 +54,7 @@ passport.use('local-login',new LocalStrategy(
   }
 ));
 
-passport.use('github-login', new GitHubStrategy({
+passport.use('github', new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
     callbackURL: "http://localhost:3000/auth/github/callback"
@@ -62,10 +62,26 @@ passport.use('github-login', new GitHubStrategy({
   function(accessToken, refreshToken, profile, done) {
     process.nextTick(function(){
       console.log(profile);
-      done(err, false);
-      // User.findOrCreate({ "github.id": profile.id }, function (err, user) {
-      //   return done(err, user);
-      // });
+      User.findOne({ "github.id": profile.id }, function (err, user) {
+        if (err) { return done(err, { message: "something went wrong. try again." }); }
+        if(!user) {
+          var newUser = User();
+          newUser.name = profile.displayName;
+          if(profile.emails > 0) {
+              newUser.local.email = profile.emails[0].value;
+          }
+          newUser.github.id = profile.id;
+          if(profile.photos > 0) {
+              newUser.github.photo = profile.photos[0].value;
+          }
+          newUser.save(function(err){
+            if(err) { throw err; }
+            return done(null, newUser);
+          });
+        } else {
+          return done(err, user);
+        }
+      });
     });
   }
 ));

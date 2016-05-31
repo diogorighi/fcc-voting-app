@@ -44,6 +44,23 @@ router.get('/login', ctrlIndex.login);
 router.get('/logout', ctrlIndex.logout);
 
 // ----------------------------------
+// Github Authentication
+
+router.get('/auth/github',
+  passport.authenticate('github', { scope: [ 'user:email' ] }));
+
+router.get('/auth/github/callback',
+  passport.authenticate('github', {
+    failureRedirect: '/',
+    failureFlash: true
+  }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    req.flash('success', 'Logged with github!');
+    res.redirect('/profile');
+  });
+
+// ----------------------------------
 // Functions
 
 function isLoggedIn(req, res, next) {

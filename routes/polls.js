@@ -36,7 +36,7 @@ router.use(function(req, res, next) {
 
 router.get('/new', isLoggedIn, ctrlPolls.new);
 router.post('/', isLoggedIn, ctrlPolls.create);
-router.get('/success/:id', ctrlPolls.createdWithSuccess);
+router.get('/success/:id', isLoggedIn, ctrlPolls.createdWithSuccess);
 router.delete('/:id', isLoggedIn, ctrlPolls.deletePoll);
 
 router.get('/:id', ctrlPolls.show);

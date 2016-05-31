@@ -106,9 +106,7 @@ module.exports.vote = function(req, res) {
 
 module.exports.deletePoll = function(req, res) {
   var pollId = req.params.id;
-
-  console.log(pollId);
-
+  
   Poll.findById(pollId, function(err, poll) {
     poll.remove(function(err){
       if(err) { return res.status(500).send('There was and error deletig your poll.'); }

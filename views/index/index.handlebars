@@ -1,7 +1,12 @@
 <div class="jumbotron">
   <h1 class="display-4">Welcome to Voting App!</h1>
-    <p class="lead">Please <a href="/login">Login</a> or <a href="/signup">Sign Up</a> to create your polls!</p>
-    <a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a>
+    {{#if currentUser}}
+      <p class="lead"> Hello, {{currentUser.name}}! Have a nice day! ;)</p>
+    {{else}}
+      <p class="lead">Please <a href="/login">Login</a> or <a href="/signup">Sign Up</a> to create your polls!</p>
+      <a class="btn btn-success" href="#" role="button">Sign up today</a>
+      <a class="btn btn-secondary" href="/auth/github" role="button"><i class="fa fa-github"></i>Login with Github</a>
+    {{/if}}
 </div>
 
 <ul class="list-group">

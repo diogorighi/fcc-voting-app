@@ -11,7 +11,8 @@ var userSchema = new mongoose.Schema({
 		password: String
 	},
 	github: {
-		id: String
+		id: String,
+		photo: String
 	},
 	createdAt: { type: Date, default: Date.now }
 });
